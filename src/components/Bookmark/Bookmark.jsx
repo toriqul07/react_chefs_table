@@ -1,16 +1,20 @@
 import PropTypes from 'prop-types';
-
-const Bookmark = ({bookmark}) => {
-    const {title} = bookmark;
+const Bookmark = ({ bookmark ,index}) => {
+    console.log(bookmark);
+    const { recipe_name, preparing_time, calories } = bookmark
     return (
-        <div className='bg-slate-200 p-4 m-4 rounded-xl'>
-            <h3 className='text-2xl'>{title}</h3>
+        <div>
+            <div className='flex gap-4 pb-8 bg-white bg-opacity-3'>
+                <p>{index}</p>
+                <h3 className='text-xl'>{recipe_name}</h3>
+                <h3 className='text-xl'>{preparing_time}</h3>
+                <h3 className='text-xl'>{calories}</h3>
+                <button className='rounded-full bg-green-400 p-4'>Preparing</button>
+            </div>
         </div>
     );
 };
-
 Bookmark.propTypes = {
     bookmark: PropTypes.object
 }
-
 export default Bookmark;

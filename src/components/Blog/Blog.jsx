@@ -1,45 +1,40 @@
 import PropTypes from 'prop-types';
-import { FaBookmark } from 'react-icons/fa';
-
-const Blog = ({ blog, handleAddToBookmark, handleMarkAsRead }) => {
-    const { id, title, cover, author, author_img, posted_date, reading_time, hashtags } = blog;
+import clock from '../../assets/images/clock.png';
+import fire from '../../assets/images/fire.png';
+const Blog = ({ blog,handleAddToBookmark}) => {
+    const { recipe_name, recipe_image, short_description, ingredients, preparing_time, calories } = blog;
     return (
-        <div className='mb-20  space-y-4'>
-            <img className='w-full mb-8' src={cover} alt={`Cover picture of the title ${title}`} />
-            <div className='flex justify-between mb-4'>
-                <div className='flex'>
-                    <img className='w-14' src={author_img} alt="" />
-                    <div className='ml-6'>
-                        <h3 className='text-2xl'>{author}</h3>
-                        <p>{posted_date}</p>
-                    </div>
-                </div>
+        <div>
+            <div>
                 <div>
-                    <span>{reading_time} min read</span>
-                    <button
-                        onClick={() => handleAddToBookmark(blog)}
-                        className='ml-2 text-2xl text-red-600'
-                    ><FaBookmark></FaBookmark></button>
+                    <img className='rounded-lg bg-[url(5)] pb-2' src={recipe_image} alt="" />
+                    <h3 className='text-black font-Lexend font-extrabold text-2xl leading-6 tracking-normal text-left pb-2'>{recipe_name}</h3>
+                    <h6 className='text-gray-500 font-Fira-Sans font-normal text-base leading-10 tracking-normal text-left pb-2'>{short_description}</h6>
+                    <div className='pt-2'>
+                        <h6 className='text-black font-Lexend font-medium text-base leading-6 tracking-normal text-left'>Ingredients: {ingredients.length}</h6>
+                        <li className='text-gray-500 font-Fira-Sans font-normal text-base leading-10 tracking-normal text-left'>{ingredients[0]}</li>
+                        <li className='text-gray-500 font-Fira-Sans font-normal text-base leading-10 tracking-normal text-left'>{ingredients[1]}</li>
+                        <li className='text-gray-500 font-Fira-Sans font-normal text-base leading-10 tracking-normal text-left'>{ingredients[2]}</li>
+                        <li className='text-gray-500 font-Fira-Sans font-normal text-base leading-10 tracking-normal text-left'>{ingredients[3]}</li>
+                    </div>
+                    <div className='flex gap-5 items-center pb-3'>
+                        <div className='flex gap-2 items-center'>
+                            <img src={clock} alt="" />
+                            <h4>{preparing_time}</h4>
+                        </div>
+                        <div className='flex gap-2 items-center'>
+                            <img src={fire} alt="" />
+                            <h4>{calories}</h4>
+                        </div>
+                    </div>
+                    <button onClick={()=>handleAddToBookmark(blog)} className='rounded-full bg-green-400 text-black font-Lexend font-medium text-base leading-6 tracking-normal text-left p-5 mb-4'>Want to Cook</button>
                 </div>
             </div>
-            <h2 className="text-4xl">{title}</h2>
-            <p>
-                {
-                    hashtags.map((hash, idx) => <span key={idx}><a href="">#{hash}</a> </span>)
-                }
-            </p>
-            <button
-                onClick={() => handleMarkAsRead(id, reading_time)}
-                className='text-purple-800 font-bold underline'
-            >Mark As Read</button>
         </div>
     );
 };
-
 Blog.propTypes = {
     blog: PropTypes.object.isRequired,
-    handleAddToBookmark: PropTypes.func,
-    handleMarkAsRead: PropTypes.func
+    handleAddToBookmark: PropTypes.func
 }
-
 export default Blog;
